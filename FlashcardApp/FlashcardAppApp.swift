@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct FlashcardAppApp: App {
+    @StateObject var store = FlashcardStore()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(store)
         }
     }
 }
+
