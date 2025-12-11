@@ -1,5 +1,5 @@
 //
-//  AddFlashcardView.swift
+//  AddSetView.swift
 //  FlashcardApp
 //
 //  Created by Arjun Averineni on 12/10/25.
@@ -7,31 +7,23 @@
 
 import SwiftUI
 
-struct AddFlashcardView: View {
+struct AddSetView: View {
     @EnvironmentObject var store: FlashcardStore
     @Environment(\.dismiss) var dismiss
-    
-    var set: FlashcardSet
-    
-    @State private var question = ""
-    @State private var answer = ""
+
+    @State private var name = ""
 
     var body: some View {
         NavigationView {
             Form {
-                Section("Question") {
-                    TextField("Enter question", text: $question)
-                }
-                Section("Answer") {
-                    TextField("Enter answer", text: $answer)
-                }
+                TextField("Set name", text: $name)
             }
-            .navigationTitle("Add Card")
+            .navigationTitle("New Set")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        guard !question.isEmpty, !answer.isEmpty else { return }
-                        store.addCard(to: set, question: question, answer: answer)
+                        guard !name.isEmpty else { return }
+                        store.addSet(name: name)
                         dismiss()
                     }
                 }
@@ -42,4 +34,3 @@ struct AddFlashcardView: View {
         }
     }
 }
-

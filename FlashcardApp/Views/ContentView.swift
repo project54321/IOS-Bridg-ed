@@ -9,26 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var store: FlashcardStore
-    @State private var showingAdd = false
-    
+    @State private var showingAddSet = false
+
     var body: some View {
         NavigationView {
             List {
-                ForEach(store.cards) { card in
-                    NavigationLink(destination: FlashcardView(card: card)) {
-                        Text(card.question)
-                            .lineLimit(1)
+                ForEach(store.sets) { set in
+                    NavigationLink(destination: FlashcardSetView(set: set)) {
+                        Text(set.name)
                     }
                 }
             }
-            .navigationTitle("Flashcards")
+            .navigationTitle("Flashcard Sets")
             .toolbar {
-                Button(action: { showingAdd = true }) {
-                    Image(systemName: "plus")
+                Button(action: { showingAddSet = true }) {
+                    Image(systemName: "folder.badge.plus")
                 }
             }
-            .sheet(isPresented: $showingAdd) {
-                AddFlashcardView()
+            .sheet(isPresented: $showingAddSet) {
+                AddSetView()
             }
         }
     }
