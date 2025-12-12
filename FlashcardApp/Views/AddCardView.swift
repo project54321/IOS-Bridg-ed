@@ -6,6 +6,14 @@
 //
 
 
+//
+//  AddCardView.swift
+//  FlashcardApp
+//
+//  Created by Arjun Averineni on 12/11/25.
+//
+
+
 import SwiftUI
 
 struct AddCardView: View {

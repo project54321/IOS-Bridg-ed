@@ -31,7 +31,7 @@ struct StudyView: View {
 
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.blue.opacity(0.7)) // You can change the color here
+                            .fill(Color.blue.opacity(0.7))
                             .frame(height: 320)
                             .shadow(radius: 6)
 

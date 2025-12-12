@@ -50,7 +50,6 @@ struct SetDetailView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        // tap anywhere on the row to edit
                         editingCard = card
                     }
                 }
@@ -77,15 +76,14 @@ struct SetDetailView: View {
                 }
             }
         }
-        // MARK: - Sheets
         .sheet(isPresented: $showingAddCard) {
-            AddCardView(set: $set) // ✅ binding passed correctly
+            AddCardView(set: $set)
         }
         .sheet(item: $editingCard) { card in
-            EditCardView(set: $set, card: card) // ✅ binding passed correctly
+            EditCardView(set: $set, card: card)
         }
         .sheet(isPresented: $showingStudy) {
-            StudyView(cards: $set.cards) // ✅ binding passed correctly
+            StudyView(cards: $set.cards)
         }
     }
 }

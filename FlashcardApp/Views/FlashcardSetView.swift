@@ -39,14 +39,13 @@ struct FlashcardSetView: View {
                                 .foregroundColor(.secondary)
                         }
                         Spacer()
-                        // Edit button
                         Button {
                             editingCard = card
                         } label: {
                             Image(systemName: "square.and.pencil")
                         }
                         .buttonStyle(.borderless)
-                        // Delete button
+                        
                         Button {
                             if let index = set.cards.firstIndex(where: { $0.id == card.id }) {
                                 set.cards.remove(at: index)
