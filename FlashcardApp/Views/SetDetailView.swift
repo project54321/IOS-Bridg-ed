@@ -1,13 +1,14 @@
 //
-//  FlashcardSetView.swift
+//  SetDetailView.swift
 //  FlashcardApp
 //
-//  Created by Arjun Averineni on 12/10/25.
+//  Created by Arjun Averineni on 12/11/25.
 //
+
 
 import SwiftUI
 
-struct FlashcardSetView: View {
+struct SetDetailView: View {
     @EnvironmentObject var store: FlashcardStore
     @Binding var set: FlashcardSet
 
@@ -19,11 +20,10 @@ struct FlashcardSetView: View {
         VStack {
             if set.cards.isEmpty {
                 VStack(spacing: 12) {
-                    Image(systemName: "doc.text.magnifyingglass")
-                        .font(.system(size: 50))
-                        .foregroundColor(.gray)
-                    Text("No cards in this set yet.")
-                        .foregroundColor(.gray)
+                    Text("No cards yet")
+                        .foregroundColor(.secondary)
+                    Button("Add Card") { showingAddCard = true }
+                        .padding(.top, 4)
                 }
                 .padding(.top, 50)
             }
@@ -31,54 +31,61 @@ struct FlashcardSetView: View {
             List {
                 ForEach(set.cards) { card in
                     HStack {
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading) {
                             Text(card.question)
                                 .font(.headline)
+                                .lineLimit(1)
                             Text(card.answer)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
+                                .lineLimit(1)
                         }
                         Spacer()
-                        // Edit button
                         Button {
                             editingCard = card
                         } label: {
                             Image(systemName: "square.and.pencil")
                         }
                         .buttonStyle(.borderless)
-                        // Delete button
-                        Button {
-                            if let index = set.cards.firstIndex(where: { $0.id == card.id }) {
-                                set.cards.remove(at: index)
-                            }
-                        } label: {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                        }
-                        .buttonStyle(.borderless)
                     }
-                    .padding(.vertical, 6)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        // tap anywhere on the row to edit
+                        editingCard = card
+                    }
+                }
+                .onDelete { indexSet in
+                    set.cards.remove(atOffsets: indexSet)
                 }
             }
         }
         .navigationTitle(set.name)
         .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button("Study") { showingStudy = true }
-                Button { showingAddCard = true } label: {
-                    Image(systemName: "plus")
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack {
+                    Button {
+                        showingStudy = true
+                    } label: {
+                        Text("Study")
+                    }
+
+                    Button {
+                        showingAddCard = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
         }
-        // Sheets
+        // MARK: - Sheets
         .sheet(isPresented: $showingAddCard) {
-            AddCardView(set: $set)
+            AddCardView(set: $set) // ✅ binding passed correctly
         }
         .sheet(item: $editingCard) { card in
-            EditCardView(set: $set, card: card)
+            EditCardView(set: $set, card: card) // ✅ binding passed correctly
         }
         .sheet(isPresented: $showingStudy) {
-            StudyView(cards: $set.cards)
+            StudyView(cards: $set.cards) // ✅ binding passed correctly
         }
     }
 }

@@ -1,25 +1,16 @@
 //
-//  AddFlashcardView.swift
+//  AddCardView.swift
 //  FlashcardApp
 //
 //  Created by Arjun Averineni on 12/11/25.
 //
 
 
-//
-//  AddFlashcardView.swift
-//  FlashcardApp
-//
-//  Created by Arjun Averineni on 12/10/25.
-//
-
 import SwiftUI
 
-struct AddFlashcardView: View {
-    @EnvironmentObject var store: FlashcardStore
+struct AddCardView: View {
+    @Binding var set: FlashcardSet
     @Environment(\.dismiss) var dismiss
-
-    var set: FlashcardSet
 
     @State private var question = ""
     @State private var answer = ""
@@ -38,14 +29,12 @@ struct AddFlashcardView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        guard !question.isEmpty else { return }
-                        guard !answer.isEmpty else { return }
-
-                        store.addCard(to: set, question: question, answer: answer)
+                        guard !question.trimmingCharacters(in: .whitespaces).isEmpty,
+                              !answer.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+                        set.cards.append(Flashcard(question: question, answer: answer))
                         dismiss()
                     }
                 }
-
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
                 }
