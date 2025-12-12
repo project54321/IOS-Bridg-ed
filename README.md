@@ -63,6 +63,8 @@ Open Bridg-ED.xcodeproj or Bridg-ED.xcworkspace in Xcode (latest recommended ver
 ⚠️ Note: This app is not published on the App Store. Users can run the project locally on their devices.
 
 ## Project Structure
+
+```yaml
 FlashcardApp/
   ├── Models/
   │     └── Flashcard.swift
@@ -77,11 +79,11 @@ FlashcardApp/
   │     └── StudyView.swift
   ├── Assets/
   └── FlashcardAppApp.swift
-Models: Data structures for flashcards and sets.
+```
 
-ViewModels: Handles the data layer and persistence.
-
-Views: SwiftUI views for creating, editing, and studying flashcards.
+- Models: Data structures for flashcards and sets.
+- ViewModels: Handles the data layer and persistence.
+- Views: SwiftUI views for creating, editing, and studying flashcards.
 
 Tech Stack
 Language: Swift 5
