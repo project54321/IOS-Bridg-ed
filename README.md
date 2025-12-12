@@ -68,14 +68,20 @@ Open Bridg-ED.xcodeproj or Bridg-ED.xcworkspace in Xcode (latest recommended ver
 FlashcardApp/
   ├── Models/
   │     └── Flashcard.swift
+  |     └── FlashcardSet.swift
   ├── ViewModels/
   │     └── FlashcardStore.swift
   ├── Views/
-  │     ├── ContentView.swift
-  │     ├── FlashcardView.swift
+  |     └── AddCardToSetView.swift
   │     ├── AddCardView.swift
-  │     ├── EditCardView.swift
+  │     ├── AddFlashcardView.swift
+  │     ├── AddSetView.swift
+  |     └── ContentView.swift
+  │     ├── EditCardInStudyView.swift
+  |     └── EditCardView.swift
   │     ├── FlashcardSetView.swift
+  |     └── FlashcardView.swift
+  |     └── SetDetailView.swift
   │     └── StudyView.swift
   ├── Assets/
   └── FlashcardAppApp.swift
@@ -90,6 +96,8 @@ Language: Swift 5
 Framework: SwiftUI
 Storage: UserDefaults (local persistent storage)
 Platform: iOS 17+
+
+Footnote: This project structure will change over time because there is a lot of redundant code in this repository.
 
 **Inspiration**
 This app is a mobile adaptation of my hackathon project Bridg-ED, originally a web-based flashcard platform. It brings all the features of the web version to a native mobile experience, with offline capability and touch-friendly interactions.
